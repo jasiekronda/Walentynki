@@ -135,7 +135,7 @@ function flashRainbowColors(callback) {
         if (callback) {
             callback();
         }
-    }, 2500); // Flash colors for 2 seconds
+    }, 1900); // Flash colors for 2 seconds
 }
 
 // Function to display the cat.gif initially
@@ -208,7 +208,7 @@ function createFlyingHeart() {
     // Remove after animation ends
     setTimeout(() => {
         heart.remove();
-    }, 5000);
+    }, 7000);
 }
 
 function startHeartAnimation() {
