@@ -3,6 +3,7 @@
 // Function to handle button click events
 var noMessages = ["JESTEŚ PEWNA?", "Na 100%?", "Na pewno pewno?", "Ostatnia szansa! 😭"];
 var noClickCount = 0;
+var moveNoButton = false;
 function selectOption(option) {
     // Check which option was clicked
     if (option === 'yes') {
@@ -20,11 +21,12 @@ function selectOption(option) {
             noClickCount++;
         } else {
             noButton.innerText = "Kliknij proszę tak 😡";
+            moveNoButton = true; 
         }
 
         var yesButton = document.getElementById('yes-button');
         var currentFontSize = window.getComputedStyle(yesButton).getPropertyValue('font-size');
-        var maxFontSize = 60; // Prevent it from getting too large
+        var maxFontSize = 120; // Prevent it from getting too large
         var newSize = Math.min(parseFloat(currentFontSize) * 2, maxFontSize);
         yesButton.style.fontSize = newSize + 'px';
     } else {
@@ -118,5 +120,26 @@ function startHeartAnimation() {
         setTimeout(createFlyingHeart, i * 200); // Add a new heart every 200ms
     }
 }
+function moveButton(event) {
+    if (moveNoButton) {
+        var noButton = document.getElementById('no-button');
+        var buttonRect = noButton.getBoundingClientRect();
+        var offsetX = (Math.random() * 200 - 100); // Random X movement
+        var offsetY = (Math.random() * 200 - 100); // Random Y movement
 
+        var newX = buttonRect.left + offsetX;
+        var newY = buttonRect.top + offsetY;
+
+        // Prevent button from going out of bounds
+        newX = Math.max(10, Math.min(window.innerWidth - buttonRect.width - 10, newX));
+        newY = Math.max(10, Math.min(window.innerHeight - buttonRect.height - 10, newY));
+
+        noButton.style.position = "absolute";
+        noButton.style.left = newX + "px";
+        noButton.style.top = newY + "px";
+    }
+}
+
+// Attach event listener to move the button when the mouse gets close
+document.addEventListener("mousemove", moveButton);
 displayCat();
