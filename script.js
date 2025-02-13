@@ -6,39 +6,36 @@ var noClickCount = 0;
 var moveNoButton = false;
 function selectOption(option) {
     if (option === 'yes') {
-         // Hide buttons
-         document.getElementById('options').style.display = 'none';
+        // Hide the buttons immediately
+        document.getElementById('options').style.display = 'none';
 
-         // Create countdown text
-         var textContainer = document.getElementById('text-container');
-         var countdownText = document.createElement('div');
-         countdownText.id = "countdown-text";
-         countdownText.style.fontSize = "40px";
-         countdownText.style.marginTop = "20px";
-         countdownText.innerText = "Poczekaj sekundkę... 3";
-         textContainer.appendChild(countdownText);
- 
-         let count = 3;
-         let countdownInterval = setInterval(() => {
-             count--;
-             if (count > 0) {
-                 countdownText.innerText = `Poczekaj sekundkę... ${count}`;
-             } else {
-                 clearInterval(countdownInterval);
-                 countdownText.innerText = "Łiiiiiiiii ❤️"; // Celebration text
-                 startHeartAnimation(); // Flying hearts effect
-            // Start the rainbow flash
-            flashRainbowColors(function() {
-                // Hide the entire text container (question + countdown)
-                document.getElementById('text-container').style.display = 'none';
-                
-                // Display the new GIFs
+        // Create and append the countdown text
+        var textContainer = document.getElementById('text-container');
+        var countdownText = document.createElement('div');
+        countdownText.id = "countdown-text";
+        countdownText.style.fontSize = "40px";
+        countdownText.style.marginTop = "20px";
+        countdownText.innerText = "Poczekaj sekundkę... 3";
+        textContainer.appendChild(countdownText);
+
+        let count = 3;
+        let countdownInterval = setInterval(() => {
+            count--;
+            if (count > 0) {
+                countdownText.innerText = `Poczekaj sekundkę... ${count}`;
+            } else {
+                clearInterval(countdownInterval);
+                // Change the text to the celebration text and keep it displayed
+                countdownText.innerText = "Łiiiiiiiii ❤️";
+
+                // Immediately start heart animations, display new GIFs, and start the rainbow effect
+                startHeartAnimation();
                 displayCatHeart();
                 displayCornerGif();
-            });
-        }
-    }, 1000); // Update countdown every second
-     } 
+                flashRainbowColors();
+            }
+        }, 1000);
+    }
     else if (option === 'no') {
         var noButton = document.getElementById('no-button');
 
@@ -53,7 +50,7 @@ function selectOption(option) {
         // Increase "Yes" button size, but prevent extreme growth
         var yesButton = document.getElementById('yes-button');
         var currentFontSize = window.getComputedStyle(yesButton).getPropertyValue('font-size');
-        var maxFontSize = 80; // Adjusted to a more reasonable size
+        var maxFontSize = 180; // Adjusted to a more reasonable size
         var newSize = Math.min(parseFloat(currentFontSize) * 2, maxFontSize);
         yesButton.style.fontSize = newSize + 'px';
     } 
