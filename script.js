@@ -6,45 +6,45 @@ var noClickCount = 0;
 var moveNoButton = false;
 function selectOption(option) {
     if (option === 'yes') {
-        // Hide buttons
-        document.getElementById('options').style.display = 'none';
+         // Hide buttons
+         document.getElementById('options').style.display = 'none';
 
-        // Create countdown text
-        var textContainer = document.getElementById('text-container');
-        var countdownText = document.createElement('div');
-        countdownText.id = "countdown-text";
-        countdownText.style.fontSize = "40px";
-        countdownText.style.marginTop = "20px";
-        countdownText.innerText = "Poczekaj sekundkę... 3";
-        textContainer.appendChild(countdownText);
-
-        let count = 3;
-        let countdownInterval = setInterval(() => {
-            count--;
-            if (count > 0) {
-                countdownText.innerText = `Poczekaj sekundkę... ${count}`;
-            } else {
-                clearInterval(countdownInterval);
-                countdownText.innerText = "Łiiiiiiiii ❤️"; // Celebration text
-
-                startHeartAnimation(); // Flying hearts effect
-                
-                // Start the rainbow animation and then show GIFs
-                flashRainbowColors(function() {
-                    document.getElementById('question').style.display = 'none';
-                    
-                    // Remove countdown text after a moment
-                    setTimeout(() => {
-                        countdownText.style.display = "none";
-                    }, 1000); 
-
-                    displayCatHeart(); // Show heart GIF
-                    displayCornerGif(); // Show extra GIF in corner
-                });
-            }
-        }, 1000); // Update countdown every second
-    } 
-    
+         // Create countdown text
+         var textContainer = document.getElementById('text-container');
+         var countdownText = document.createElement('div');
+         countdownText.id = "countdown-text";
+         countdownText.style.fontSize = "40px";
+         countdownText.style.marginTop = "20px";
+         countdownText.innerText = "Poczekaj sekundkę... 3";
+         textContainer.appendChild(countdownText);
+ 
+         let count = 3;
+         let countdownInterval = setInterval(() => {
+             count--;
+             if (count > 0) {
+                 countdownText.innerText = `Poczekaj sekundkę... ${count}`;
+             } else {
+                 clearInterval(countdownInterval);
+                 countdownText.innerText = "Łiiiiiiiii ❤️"; // Celebration text
+                 startHeartAnimation(); // Flying hearts effect
+                 
+                 // Delay before showing GIFs
+                 setTimeout(() => {
+                     document.getElementById('question').style.display = 'none';
+ 
+                     // Remove countdown text
+                     countdownText.style.display = "none";
+ 
+                     // Show the GIFs **before** flashing colors
+                     displayCatHeart();
+                     displayCornerGif();
+ 
+                     // Now start the rainbow flash
+                     flashRainbowColors();
+                 }, 1000); // Short delay before everything happens
+             }
+         }, 1000); // Countdown every second
+     } 
     else if (option === 'no') {
         var noButton = document.getElementById('no-button');
 
@@ -59,7 +59,7 @@ function selectOption(option) {
         // Increase "Yes" button size, but prevent extreme growth
         var yesButton = document.getElementById('yes-button');
         var currentFontSize = window.getComputedStyle(yesButton).getPropertyValue('font-size');
-        var maxFontSize = 240; // Adjusted to a more reasonable size
+        var maxFontSize = 80; // Adjusted to a more reasonable size
         var newSize = Math.min(parseFloat(currentFontSize) * 2, maxFontSize);
         yesButton.style.fontSize = newSize + 'px';
     } 
@@ -68,6 +68,7 @@ function selectOption(option) {
         alert('Invalid option!');
     }
 }
+
 
 // function selectOption(option) {
 //     // Check which option was clicked
