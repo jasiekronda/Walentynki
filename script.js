@@ -5,17 +5,10 @@ var noMessages = ["JESTEŚ PEWNA?", "Na 100%?", "Na pewno pewno?", "Ostatnia sza
 var noClickCount = 0;
 var moveNoButton = false;
 function selectOption(option) {
-    // Check which option was clicked
     if (option === 'yes') {
-        // Flash rainbow colors
-        // flashRainbowColors(function() {
-        //     document.getElementById('question').style.display = 'none'; // Hide the question
-        //     displayCatHeart(); // Display the cat-heart.gif
-        //     displayCornerGif(); 
-        //     startHeartAnimation();
-        // });
+        // Hide buttons
         document.getElementById('options').style.display = 'none';
-        
+
         // Create countdown text
         var textContainer = document.getElementById('text-container');
         var countdownText = document.createElement('div');
@@ -33,53 +26,125 @@ function selectOption(option) {
             } else {
                 clearInterval(countdownInterval);
                 countdownText.innerText = "Łiiiiiiiii ❤️"; // Celebration text
-                startHeartAnimation(); // Flying hearts
+
+                startHeartAnimation(); // Flying hearts effect
                 
                 // Start the rainbow animation and then show GIFs
                 flashRainbowColors(function() {
                     document.getElementById('question').style.display = 'none';
-                    displayCatHeart();
-                    displayCornerGif();
+                    
+                    // Remove countdown text after a moment
+                    setTimeout(() => {
+                        countdownText.style.display = "none";
+                    }, 1000); 
+
+                    displayCatHeart(); // Show heart GIF
+                    displayCornerGif(); // Show extra GIF in corner
                 });
             }
         }, 1000); // Update countdown every second
-    } else if (option === 'no') {
+    } 
+    
+    else if (option === 'no') {
         var noButton = document.getElementById('no-button');
+
         if (noClickCount < noMessages.length) {
             noButton.innerText = noMessages[noClickCount];
             noClickCount++;
         } else {
-            noButton.innerText = "Kliknij proszę tak 😡";
-            moveNoButton = true; 
+            noButton.innerText = "Kliknij proszę tak 😡"; 
+            moveNoButton = true; // Activate moving "No" button
         }
 
+        // Increase "Yes" button size, but prevent extreme growth
         var yesButton = document.getElementById('yes-button');
         var currentFontSize = window.getComputedStyle(yesButton).getPropertyValue('font-size');
-        var maxFontSize = 240; // Prevent it from getting too large
+        var maxFontSize = 240; // Adjusted to a more reasonable size
         var newSize = Math.min(parseFloat(currentFontSize) * 2, maxFontSize);
         yesButton.style.fontSize = newSize + 'px';
-    } else {
-        // If neither "Yes" nor "No" was clicked, show an alert message
+    } 
+    
+    else {
         alert('Invalid option!');
     }
 }
 
-// Function to flash rainbow colors and then execute a callback function
-function flashRainbowColors(callback) {
-    var colors = ['#ff0000', '#ff7f00', '#ffff00', '#00ff00', '#0000ff', '#4b0082', '#9400d3'];
-    var i = 0;
-    var interval = setInterval(function() {
-        document.body.style.backgroundColor = colors[i];
-        i = (i + 1) % colors.length;
-    }, 200); // Change color every 200 milliseconds
-    setTimeout(function() {
-        clearInterval(interval);
-        document.body.style.backgroundColor = ''; // Reset background color
-        if (callback) {
-            callback();
-        }
-    }, 1900); // Flash colors for 2 seconds
-}
+// function selectOption(option) {
+//     // Check which option was clicked
+//     if (option === 'yes') {
+//         // Flash rainbow colors
+//         // flashRainbowColors(function() {
+//         //     document.getElementById('question').style.display = 'none'; // Hide the question
+//         //     displayCatHeart(); // Display the cat-heart.gif
+//         //     displayCornerGif(); 
+//         //     startHeartAnimation();
+//         // });
+//         document.getElementById('options').style.display = 'none';
+        
+//         // Create countdown text
+//         var textContainer = document.getElementById('text-container');
+//         var countdownText = document.createElement('div');
+//         countdownText.id = "countdown-text";
+//         countdownText.style.fontSize = "40px";
+//         countdownText.style.marginTop = "20px";
+//         countdownText.innerText = "Poczekaj sekundkę... 3";
+//         textContainer.appendChild(countdownText);
+
+//         let count = 3;
+//         let countdownInterval = setInterval(() => {
+//             count--;
+//             if (count > 0) {
+//                 countdownText.innerText = `Poczekaj sekundkę... ${count}`;
+//             } else {
+//                 clearInterval(countdownInterval);
+//                 countdownText.innerText = "Łiiiiiiiii ❤️"; // Celebration text
+//                 startHeartAnimation(); // Flying hearts
+                
+//                 // Start the rainbow animation and then show GIFs
+//                 flashRainbowColors(function() {
+//                     document.getElementById('question').style.display = 'none';
+//                     displayCatHeart();
+//                     displayCornerGif();
+//                 });
+//             }
+//         }, 1000); // Update countdown every second
+//     } else if (option === 'no') {
+//         var noButton = document.getElementById('no-button');
+//         if (noClickCount < noMessages.length) {
+//             noButton.innerText = noMessages[noClickCount];
+//             noClickCount++;
+//         } else {
+//             noButton.innerText = "Kliknij proszę tak 😡";
+//             moveNoButton = true; 
+//         }
+
+//         var yesButton = document.getElementById('yes-button');
+//         var currentFontSize = window.getComputedStyle(yesButton).getPropertyValue('font-size');
+//         var maxFontSize = 240; // Prevent it from getting too large
+//         var newSize = Math.min(parseFloat(currentFontSize) * 2, maxFontSize);
+//         yesButton.style.fontSize = newSize + 'px';
+//     } else {
+//         // If neither "Yes" nor "No" was clicked, show an alert message
+//         alert('Invalid option!');
+//     }
+// }
+
+// // Function to flash rainbow colors and then execute a callback function
+// function flashRainbowColors(callback) {
+//     var colors = ['#ff0000', '#ff7f00', '#ffff00', '#00ff00', '#0000ff', '#4b0082', '#9400d3'];
+//     var i = 0;
+//     var interval = setInterval(function() {
+//         document.body.style.backgroundColor = colors[i];
+//         i = (i + 1) % colors.length;
+//     }, 200); // Change color every 200 milliseconds
+//     setTimeout(function() {
+//         clearInterval(interval);
+//         document.body.style.backgroundColor = ''; // Reset background color
+//         if (callback) {
+//             callback();
+//         }
+//     }, 1900); // Flash colors for 2 seconds
+// }
 
 // Function to display the cat.gif initially
 function displayCat() {

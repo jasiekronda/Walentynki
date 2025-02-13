@@ -72,6 +72,12 @@ button:hover {
     animation: floatUp 5s linear forwards;
 }
 
+#countdown-text {
+    font-family: 'Sacramento', cursive;
+    font-size: 40px;
+    color: #ff4081;
+    animation: fadeInOut 1s ease-in-out;
+}
 @keyframes floatUp {
     0% {
         transform: translateY(0);
@@ -82,12 +88,7 @@ button:hover {
         opacity: 0;
     }
 }
-#countdown-text {
-    font-family: 'Sacramento', cursive;
-    font-size: 40px;
-    color: #ff4081;
-    animation: fadeInOut 1s ease-in-out;
-}
+
 
 @keyframes fadeInOut {
     0% { opacity: 0; }
