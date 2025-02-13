@@ -8,7 +8,7 @@ function selectOption(option) {
     if (option === 'yes') {
         // Hide the buttons immediately
         document.getElementById('options').style.display = 'none';
-
+        document.getElementById('question').style.display = 'none';
         // Create and append the countdown text
         var textContainer = document.getElementById('text-container');
         var countdownText = document.createElement('div');
@@ -26,6 +26,7 @@ function selectOption(option) {
             } else {
                 clearInterval(countdownInterval);
                 // Change the text to the celebration text and keep it displayed
+                
                 countdownText.innerText = "Łiiiiiiiii ❤️";
 
                 // Immediately start heart animations, display new GIFs, and start the rainbow effect
