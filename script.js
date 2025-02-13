@@ -27,29 +27,17 @@ function selectOption(option) {
                  clearInterval(countdownInterval);
                  countdownText.innerText = "Łiiiiiiiii ❤️"; // Celebration text
                  startHeartAnimation(); // Flying hearts effect
-                flashRainbowColors(function() {
-                document.getElementById('question').style.display = 'none'; // Hide the question
-                displayCatHeart(); // Display the cat-heart.gif
-                displayCornerGif(); 
-                startHeartAnimation();
-         });
-        // document.getElementById('options').style.display = 'none';
-        //          // Delay before showing GIFs
-        //          setTimeout(() => {
-        //              document.getElementById('question').style.display = 'none';
- 
-        //              // Remove countdown text
-        //              countdownText.style.display = "none";
- 
-        //              // Show the GIFs **before** flashing colors
-        //              displayCatHeart();
-        //              displayCornerGif();
- 
-        //              // Now start the rainbow flash
-        //              flashRainbowColors();
-        //          }, 1000); // Short delay before everything happens
-             }
-         }, 1000); // Countdown every second
+            // Start the rainbow flash
+            flashRainbowColors(function() {
+                // Hide the entire text container (question + countdown)
+                document.getElementById('text-container').style.display = 'none';
+                
+                // Display the new GIFs
+                displayCatHeart();
+                displayCornerGif();
+            });
+        }
+    }, 1000); // Update countdown every second
      } 
     else if (option === 'no') {
         var noButton = document.getElementById('no-button');
@@ -150,7 +138,7 @@ function flashRainbowColors(callback) {
         if (callback) {
             callback();
         }
-    }, 1900); // Flash colors for 2 seconds
+    }, 2500); // Flash colors for 2 seconds
 }
 
 // Function to display the cat.gif initially
@@ -179,22 +167,32 @@ function displayCornerGif() {
 
 // Function to display the cat-heart.gif
 function displayCatHeart() {
-    // Clear existing content in the image container
-    document.getElementById('image-container').innerHTML = '';
-    // Get the container where the image will be displayed
+    // // Clear existing content in the image container
+    // document.getElementById('image-container').innerHTML = '';
+    // // Get the container where the image will be displayed
+    // var imageContainer = document.getElementById('image-container');
+    // // Create a new Image element for the cat-heart
+    // var catHeartImage = new Image();
+    // // Set the source (file path) for the cat-heart image
+    // catHeartImage.src = 'cute-no-background.gif'; // Assuming the cat-heart image is named "cat-heart.gif"
+    // // Set alternative text for the image (for accessibility)
+    // catHeartImage.alt = 'Cat Heart';
+    // // When the cat-heart image is fully loaded, add it to the image container
+    // catHeartImage.onload = function() {
+    //     imageContainer.appendChild(catHeartImage);
+    //     // Hide the options container
+    //     document.getElementById('options').style.display = 'none';
+    // };
     var imageContainer = document.getElementById('image-container');
-    // Create a new Image element for the cat-heart
+    // Clear the container immediately
+    imageContainer.innerHTML = '';
     var catHeartImage = new Image();
-    // Set the source (file path) for the cat-heart image
-    catHeartImage.src = 'cute-no-background.gif'; // Assuming the cat-heart image is named "cat-heart.gif"
-    // Set alternative text for the image (for accessibility)
+    catHeartImage.src = 'cute-no-background.gif'; // New gif filename
     catHeartImage.alt = 'Cat Heart';
-    // When the cat-heart image is fully loaded, add it to the image container
-    catHeartImage.onload = function() {
-        imageContainer.appendChild(catHeartImage);
-        // Hide the options container
-        document.getElementById('options').style.display = 'none';
-    };
+    // Append the image immediately so it shows up without delay
+    imageContainer.appendChild(catHeartImage);
+    // Hide the options container (just in case)
+    document.getElementById('options').style.display = 'none';
 }
 //comment
 // Display the cat.gif initially
