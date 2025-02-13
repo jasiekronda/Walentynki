@@ -8,12 +8,41 @@ function selectOption(option) {
     // Check which option was clicked
     if (option === 'yes') {
         // Flash rainbow colors
-        flashRainbowColors(function() {
-            document.getElementById('question').style.display = 'none'; // Hide the question
-            displayCatHeart(); // Display the cat-heart.gif
-            displayCornerGif(); 
-            startHeartAnimation();
-        });
+        // flashRainbowColors(function() {
+        //     document.getElementById('question').style.display = 'none'; // Hide the question
+        //     displayCatHeart(); // Display the cat-heart.gif
+        //     displayCornerGif(); 
+        //     startHeartAnimation();
+        // });
+        document.getElementById('options').style.display = 'none';
+        
+        // Create countdown text
+        var textContainer = document.getElementById('text-container');
+        var countdownText = document.createElement('div');
+        countdownText.id = "countdown-text";
+        countdownText.style.fontSize = "40px";
+        countdownText.style.marginTop = "20px";
+        countdownText.innerText = "Poczekaj sekundkę... 3";
+        textContainer.appendChild(countdownText);
+
+        let count = 3;
+        let countdownInterval = setInterval(() => {
+            count--;
+            if (count > 0) {
+                countdownText.innerText = `Poczekaj sekundkę... ${count}`;
+            } else {
+                clearInterval(countdownInterval);
+                countdownText.innerText = "Łiiiiiiiii ❤️"; // Celebration text
+                startHeartAnimation(); // Flying hearts
+                
+                // Start the rainbow animation and then show GIFs
+                flashRainbowColors(function() {
+                    document.getElementById('question').style.display = 'none';
+                    displayCatHeart();
+                    displayCornerGif();
+                });
+            }
+        }, 1000); // Update countdown every second
     } else if (option === 'no') {
         var noButton = document.getElementById('no-button');
         if (noClickCount < noMessages.length) {
@@ -26,7 +55,7 @@ function selectOption(option) {
 
         var yesButton = document.getElementById('yes-button');
         var currentFontSize = window.getComputedStyle(yesButton).getPropertyValue('font-size');
-        var maxFontSize = 120; // Prevent it from getting too large
+        var maxFontSize = 240; // Prevent it from getting too large
         var newSize = Math.min(parseFloat(currentFontSize) * 2, maxFontSize);
         yesButton.style.fontSize = newSize + 'px';
     } else {

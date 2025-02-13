@@ -82,3 +82,15 @@ button:hover {
         opacity: 0;
     }
 }
+#countdown-text {
+    font-family: 'Sacramento', cursive;
+    font-size: 40px;
+    color: #ff4081;
+    animation: fadeInOut 1s ease-in-out;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0.8; }
+}
