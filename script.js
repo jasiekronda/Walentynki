@@ -27,21 +27,27 @@ function selectOption(option) {
                  clearInterval(countdownInterval);
                  countdownText.innerText = "Łiiiiiiiii ❤️"; // Celebration text
                  startHeartAnimation(); // Flying hearts effect
-                 
-                 // Delay before showing GIFs
-                 setTimeout(() => {
-                     document.getElementById('question').style.display = 'none';
+                flashRainbowColors(function() {
+                document.getElementById('question').style.display = 'none'; // Hide the question
+                displayCatHeart(); // Display the cat-heart.gif
+                displayCornerGif(); 
+                startHeartAnimation();
+         });
+        // document.getElementById('options').style.display = 'none';
+        //          // Delay before showing GIFs
+        //          setTimeout(() => {
+        //              document.getElementById('question').style.display = 'none';
  
-                     // Remove countdown text
-                     countdownText.style.display = "none";
+        //              // Remove countdown text
+        //              countdownText.style.display = "none";
  
-                     // Show the GIFs **before** flashing colors
-                     displayCatHeart();
-                     displayCornerGif();
+        //              // Show the GIFs **before** flashing colors
+        //              displayCatHeart();
+        //              displayCornerGif();
  
-                     // Now start the rainbow flash
-                     flashRainbowColors();
-                 }, 1000); // Short delay before everything happens
+        //              // Now start the rainbow flash
+        //              flashRainbowColors();
+        //          }, 1000); // Short delay before everything happens
              }
          }, 1000); // Countdown every second
      } 
